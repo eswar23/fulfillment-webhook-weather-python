@@ -60,6 +60,15 @@ def processRequest(req):
     result = urlopen(yql_url).read()
     data = json.loads(result)
     res = makeWebhookResult(data)
+    
+    elif req.get("result").get("action")=="getjoke":
+        baseurl = "http://api.icndb.com/jokes/random"
+        result = urlopen(baseurl).read()
+        data = json.loads(result)
+        res = makeWebhookResultForGetJoke(data)
+    else:
+        return {}
+ 
     return res
 
 
@@ -103,6 +112,13 @@ def makeWebhookResult(data):
 
     print("Response:")
     print(speech)
+    
+    def makeWebhookResultForGetJoke(data):
+    valueString = data.get('value')
+    joke = valueString.get('joke')
+    speechText = joke
+    displayText = joke
+        
 
     return {
         "speech": speech,

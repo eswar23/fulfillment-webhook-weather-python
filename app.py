@@ -61,8 +61,8 @@ def processRequest(req):
     data = json.loads(result)
     res = makeWebhookResult(data)
     
-    elif req.get("result").get("action")=="getjoke":
-        baseurl = "http://api.icndb.com/jokes/random"
+    elif req.get("result").get("action")=="sentiment":
+        baseurl = "https://prod-28.southeastasia.logic.azure.com:443/workflows/e47481137b9346109fc0a6b701c77955/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=S0quZZoJH9i8q2S3bNdZ36JNdW7MkgMEO08xuhK0_I4"
         result = urlopen(baseurl).read()
         data = json.loads(result)
         res = makeWebhookResultForGetJoke(data)
